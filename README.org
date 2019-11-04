@@ -90,5 +90,4 @@ Thanks to [[https://pixabay.com/][pixabay (sic)]] for the stock art.
 
 - [[./LICENSE.txt][GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007]].
 
-[[file:/images/logo-icon.png]]
 
