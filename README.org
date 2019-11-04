@@ -7,7 +7,9 @@
 :ID:       org_gcr_2019-03-06T17-15-24-06-00_cosmicality:B5FB31EA-EA25-4675-90B0-AE0167BAE092
 :end:
 
-The Law Of Least Surprise Lattice For Emacs.
+The Law Of Least Surprise Lattice For Emacs:
+
+Found to to reduce utterances of "What the heck?!" or the less stressful "Really? Really?!" by 16-39 percent of the Emacs user population in a double-blind study of 1742 users funded by Cyberdyne Systems, ENCOM, LexCorp, Protovision, Setec Astronomy, Tyrell Corporation, Wayne Enterprises, and Yoyodyne Propulsion Systems.
 
 * Overview
 
