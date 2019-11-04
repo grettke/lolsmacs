@@ -56,7 +56,9 @@ Emacs 26.
 
 * Installation
 
-Clone it from Git to your preferred source directory for example =~/src=
+Download [[https://github.com/grettke/lolsmacs/blob/master/lolsmacs.el][lolsmacs.el]] to your computer.
+
+If you're going to load it without using the package manager then you ought to place it in your preferred source directory for example =~/src=.
 
 #+BEGIN_SRC sh
 git clone https://github.com/grettke/lolsmacs.git
@@ -64,11 +66,18 @@ git clone https://github.com/grettke/lolsmacs.git
 
 * Usage
 
-Load it first thing into your current init file
+If you want to load the package without using the package manager then add this to your init file
 
 #+BEGIN_SRC emacs-lisp
 (and (load-file "~/src/lolsmacs/lolsmacs.el")
      (lolsmacs-init))
+#+END_SRC
+
+Otherwise you can install it using the package manager by calling ~package-install-file~ and when you're asked "Package file name:" choose =lolsmacs.el= then add this to your init file
+
+#+BEGIN_SRC emacs-lisp
+(require 'lolsmacs)
+(lolsmacs-init)
 #+END_SRC
 
 If you want to try out the features on their own before loading them start Emacs like this
