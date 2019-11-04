@@ -1,6 +1,6 @@
 #+title: LOLSMacs
 
-file:/logo.png]]
+[[file:/logo.png]]
 
 * About
 :properties:
