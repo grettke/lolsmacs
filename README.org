@@ -86,6 +86,22 @@ If you want to try out the features on their own before loading them start Emacs
 emacs --no-init-file --load ~/src/lolsmacs/lolsmacs.el --eval "(lolsmacs-init)" &
 #+END_SRC
 
+* Subjectivity Fails
+
+They say that when you believe in something you should write it down. So I did
+here in this package. There is no better way then writing something down to
+reveal what you really think and it's real level of truthiness lol.
+
+- 80 Column Character Width
+  - Although it is pretty common it isn't a fair assumption
+- Primarily File Based Development
+  - There are systems whose development cycle isn't strictly based around a
+    file. For example ~tex-mode~ let's you try things out with making file
+    changes (behind the scenes it uses temp files). APL is an environment where
+    you load up an image (XML or binary) containing your definitions and then
+    persist them at the end. Not sure how GNU APL handles it but you probably
+    don't want to be saving that big blob all the time.
+
 * Credits
 
 Thanks to the [[https://www.gnu.org/software/emacs/manual/][GNU Emacs Manuals Online]] and countless code snippets from other Emacs users.
