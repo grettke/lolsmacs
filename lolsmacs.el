@@ -77,12 +77,12 @@ function before anything else."
 
 (defvar lolsmacs-save-on-hooks
   (append
-   '(focus-out-hook mouse-leave-buffer-hook suspend-hook))
+   '(focus-out-hook mouse-leave-buffer-hook kill-emacs-hook suspend-hook))
   "When they run save all file buffers.")
 (defvar
   lolsmacs-save-buffer-only-ons
   (append
-   '(vc-diff vc-next-action vc-revert))
+   '(tex-compile vc-diff vc-next-action vc-revert))
   "Before they run save the buffer.")
 (defvar
   lolsmacs-save-buffers-ons
@@ -91,7 +91,7 @@ function before anything else."
    '(compile ns-do-hide-emacs execute-extended-command find-file occur goto-line)
    '(eval-buffer)
    '(org-export-dispatch org-babel-tangle org-babel-detangle)
-   '(kill-current-buffer list-buffers save-buffers-kill-terminal switch-to-buffer pop-to-buffer)
+   '(kill-current-buffer list-buffers save-buffers-kill-emacs save-buffers-kill-terminal switch-to-buffer pop-to-buffer)
    '(delete-frame delete-other-frames other-frame suspend-frame)
    '(delete-window quit-window other-window select-window))
   "Before they run save all file buffers.")
@@ -119,7 +119,126 @@ When `lolsmacs-save-bufs-debug' is non-nil display performance information in
   "Add save on advice to FN."
   (advice-add fn :before #'lolsmacs-save-buffer-only-ons-advice))
 (defun lolsmacs-persistence-files ()
-  "File-related persistence."
+  "Granular file-related persistence.
+
+A single value pervades this set up: all development is performed
+using file-based artifacts that are as current as possible and
+stored in version control. Its motivated by broken builds and
+other bizarre conditions due to files being out of sync between
+the file system and the editor. The entire persistence set up
+deals with this. This function deals with the granular file
+management not covered by existing modes. With that in mind here
+is where it begins.
+
+We must consider the elephant in the living room here: given
+`auto-save-visited-mode' is enabled why is this additional
+granularity even a topic? It is a topic because sometimes
+`auto-save-visited-mode' (ASVM) isn't fast enough.
+
+For example imagine editing a Makefile in Emacs, switching to a
+console terminal (either hosted within Emacs or externally using a
+terminal client), hitting the up arrow, then return to execute
+Make. You've performed this operation thousands of times and you
+do it in milliseconds. Its even faster if you rigged up a macro
+to execute and external command to do it. Is ASVM failing you
+here? Nope. ASVM is working perfectly well and as expected right
+now.
+
+Here is why: ASVM save file buffers when you've been idle for
+`auto-save-visited-interval' seconds. If you make it to large you
+can lose your work because it waited too long. If you make it to
+small it will waste energy and kill performance. ASVM's default settings are
+perfect for 99% of its use cases. Once in a while though you need to perform
+the same a lot sooner than before `auto-save-visited-interval' seconds. The
+best way to consider these cases is splitting them up into three broad groups.
+
+There are three frames of mind to get into your cognitive workspace when you
+want to configure granular file persistence
+
+  1. Handling Special Events: Events, Hooks, and Keys
+  2. Handling Unrelated File Buffers
+  3. Handling Related File Buffers
+
+When do you want to automatically save file buffers? For most of us it is most
+of the time and ASVM handles that. There are exceptions though when the save
+needs to be performed as quickly as possible. Here is the breakdown and
+examples of and how it needs to happen.
+
+1. Handling Special Events: Events, Hooks, and Keys
+
+This section tries to handling quitting Emacs in unhappy
+unplanned unpleasant ways.
+
+dying Emacs will go away on gracefully, begrudgingly, and by dying. Usually Emacs closes on request
+`save-buffers-kill-terminal'. Other times it might be locked up and you send
+it a signal `(elisp)Event Examples'. Other times you must kill
+`(elisp)Killing Emacs' Emacs' it. This function sets up the 3 ways to handle them:
+
+  A. Before advice for functions
+  B. Hooks
+  C. Key bindings
+
+It seems to cover most of the worst cases.
+
+2. Handling Unrelated File Buffers
+
+Here is the best example:
+
+The VC package `(emacs)Version Control' `vc-next-action' operates
+on a single file `(emacs) Basic VC Editing'. If you make a change
+before calling `vc-next-action' VC will ask you if you want to
+save your changes before performing the action. Most of us /want/
+the changes saved before we perform the next action which is
+usually and `add' or `commit' operating to the VC backend. In
+fact the intent and expectation of the function is that it will
+only ever operate on one file: it is safe to expect that. It is
+frustrating being prompted `yes-or-no-p' for something you'll
+answer yes to nearly every time. Before-advice saves you from
+this pain. There is a good case where this is the wrong
+functionality though.
+
+Perhaps you want to be able to perform `vc-next-action' against
+the state of the file on the disk, not in the buffer because you
+*know* that it is correct. For example if you have an automated
+build system that watches for file changes. You made some
+changes, save them, the build system saw them did the build and
+ran all of the unit tests and passed. At the same time, you
+notice something in your code and want to add a TODO item.
+However you don't want it to be part of the commit. Right now you have a file
+on disk that you know is correct and ready to commit, and changes in your
+buffer that you don't want to commit. In this case you want to commit the file
+without saving the changes. You need to all of this before
+`auto-save-visited-interval' and it is realistic to do so.
+
+3. Handling Related File Buffers
+
+Here is an example:
+
+You've got multiple buffers open working on a single project's source code. For
+the build to work correctly all of the files need to be persisted to the disk.
+As you work on code and move between buffers you need *all* of the files to be
+properly persisted (it is the same for auto-build or manual build setups).
+There are three ways to address this: 1. Add `lolsmacs-save-buffers-ons' to
+`other-window'. 2. Add the same advice to `shell'. 3. Add a hook that calls
+`lolsmacs-save-bufs' to `focus-out-hook'. This configuration addresses the
+most common development cycle for file based development. However not all
+of the  development process is file based.
+
+Some development environments and development cycles aren't
+designed strictly around changes being persisted and working off
+of a file. One good example is that of TeX. When you perform a
+compilation, \"Run TeX on...\"), a TeX file if the compiler runs
+into problems it will stop and prompt you what it should do next.
+Suppose you got here by running TeX on a file, it ran into a
+problem, and now you want to resolve it. When you use `tex-mode'
+you have two ways of running TeX on a file: the functions
+`tex-file' or `tex-buffer'. When `tex-offer-save' is non-nil the
+former asks if you want to save all file based buffers then runs
+TeX. The latter takes the contents of the current buffer, saves
+them to a temporary file, and runs TeX over it. The formers seems to be
+simpler and more predictable even if you are just playing around with what you
+might do next but it is a good example of when you might not want all of your
+files to be persisted as quickly as possible. "
   (interactive)
   (mapc (lambda (hook)
           (add-hook hook #'lolsmacs-save-bufs))
