@@ -235,7 +235,6 @@ When `lolsmacs-save-bufs-debug' is non-nil display performance information in
   (setq comint-scroll-to-bottom-on-output 'others)
   (setq comint-move-point-for-output 'others)
   (setq comint-scroll-show-maximum-output t)
-  (setq comint-move-point-for-output t)
   (setq comint-prompt-read-only nil))
 
 (defun lolsmacs-editing ()
