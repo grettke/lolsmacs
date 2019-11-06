@@ -350,6 +350,19 @@ files to be persisted as quickly as possible. "
 
   (setq kill-read-only-ok t)
 
+  ;; Here is the scenario for this style of Comint configuration:
+  ;;
+  ;; You are doing a lot of interactive work via various Comint-supported
+  ;; buffers. You are working in one buffer (the one with focus) while the
+  ;; others are doing their own thing. They are probably doing work and output
+  ;; is scrolling by and that is fine because you are not reading it. In the
+  ;; buffer you are working in though, you want to go back and read something.
+  ;; So although it its process continues to output information, you want to
+  ;; keep the cursor in the same spot. Then when you are ready to type a
+  ;; command (suppose you know the output has stopped) to do something else,
+  ;; when you type the cursor will go to the end of the buffer. That is why
+  ;; you prevent the focused buffer from auto-scrolling and moving the mark,
+  ;; and leave the other ones alone.
   (setq comint-scroll-to-bottom-on-input 'this)
   (setq comint-scroll-to-bottom-on-output 'others)
   (setq comint-move-point-for-output 'others)
