@@ -87,7 +87,7 @@ function before anything else."
 (defvar
   lolsmacs-save-buffers-ons
   (append
-   '(dired eshell grep ibuffer shell)
+   '(dired eshell grep ibuffer shell tex-compile)
    '(compile ns-do-hide-emacs execute-extended-command find-file occur goto-line)
    '(eval-buffer)
    '(org-export-dispatch org-babel-tangle org-babel-detangle)
