@@ -88,7 +88,7 @@ function before anything else."
   lolsmacs-save-buffers-ons
   (append
    '(dired eshell grep ibuffer shell tex-compile)
-   '(compile ns-do-hide-emacs execute-extended-command find-file occur goto-line)
+   '(compile ns-do-hide-emacs goto-line)
    '(eval-buffer)
    '(org-export-dispatch org-babel-tangle org-babel-detangle)
    '(kill-current-buffer list-buffers save-buffers-kill-emacs save-buffers-kill-terminal switch-to-buffer pop-to-buffer)
