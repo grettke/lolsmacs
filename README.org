@@ -47,6 +47,7 @@ Long time Emacs users you are the audience. You should load this then never look
 -  [[#requirements-and-compatibility][Requirements And Compatibility]]
 -  [[#installation][Installation]]
 -  [[#usage][Usage]]
+-  [[#subjectivity-fails][Subjectivity Fails]]
 -  [[#credits][Credits]]
 -  [[#license][License]]
 
