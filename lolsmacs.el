@@ -292,7 +292,7 @@ files to be persisted as quickly as possible. "
 
   (electric-pair-mode)
 
-  (delete-selection-mode)
+  (delete-selection-mode 1)
 
   (setq save-interprogram-paste-before-kill t)
 
