@@ -145,7 +145,7 @@ here? Nope. ASVM is working perfectly well and as expected right
 now.
 
 Here is why: ASVM save file buffers when you've been idle for
-`auto-save-visited-interval' seconds. If you make it to large you
+`auto-save-visited-interval' seconds. If you make it too large you
 can lose your work because it waited too long. If you make it to
 small it will waste energy and kill performance. ASVM's default settings are
 perfect for 99% of its use cases. Once in a while though you need to perform
