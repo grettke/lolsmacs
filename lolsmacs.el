@@ -265,7 +265,7 @@ files to be persisted as quickly as possible. "
 
   (show-paren-mode)
   (setq show-paren-delay 0)
-  (setq show-paren-style 'expression)
+  (setq show-paren-style 'mixed)
 
   (global-hl-line-mode)
 
