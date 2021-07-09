@@ -56,7 +56,7 @@ function before anything else."
   (interactive)
   (save-place-mode t)
 
-  (setq savehist-save-minibuffer-history t)
+  ;; (setq savehist-save-minibuffer-history t) ; looks like this is already the default in emacs 27
   (setq savehist-additional-variables
         '(kill-ring
           search-ring
@@ -145,8 +145,8 @@ here? Nope. ASVM is working perfectly well and as expected right
 now.
 
 Here is why: ASVM save file buffers when you've been idle for
-`auto-save-visited-interval' seconds. If you make it to large you
-can lose your work because it waited too long. If you make it to
+`auto-save-visited-interval' seconds. If you make it too large you
+can lose your work because it waited too long. If you make it too
 small it will waste energy and kill performance. ASVM's default settings are
 perfect for 99% of its use cases. Once in a while though you need to perform
 the same a lot sooner than before `auto-save-visited-interval' seconds. The
@@ -297,15 +297,15 @@ files to be persisted as quickly as possible. "
   (setq save-interprogram-paste-before-kill t)
 
   (require 'uniquify)
-  (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
-  (setq uniquify-after-kill-buffer-p t)
+  ;; (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; looks like this is already the default in emacs 27
+  ;; (setq uniquify-after-kill-buffer-p t) ; looks like this is already the default in emacs 27
   (setq uniquify-ignore-buffers-re "^\\*")
 
   (setq scroll-preserve-screen-position t)
 
   (setq scroll-conservatively 101)
 
-  (setq make-pointer-invisible t)
+  ;; (setq make-pointer-invisible t) ; looks like this is already the default in emacs 27
 
   (setq mouse-drag-copy-region t)
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
@@ -366,8 +366,8 @@ files to be persisted as quickly as possible. "
   (setq comint-scroll-to-bottom-on-input 'this)
   (setq comint-scroll-to-bottom-on-output 'others)
   (setq comint-move-point-for-output 'others)
-  (setq comint-scroll-show-maximum-output t)
-  (setq comint-prompt-read-only nil))
+  ;; (setq comint-scroll-show-maximum-output t) ; looks like this is already the default in emacs 27
+  ;; (setq comint-prompt-read-only nil)) ; looks like this is already the default in emacs 27
 
 (defun lolsmacs-editing ()
   "Editing things."
@@ -383,7 +383,7 @@ files to be persisted as quickly as possible. "
   (setq-default fill-column lolsmacs-column-width)
 
   (setq sentence-end-double-space nil)
-  (setq sentence-end-without-period nil)
+  ;; (setq sentence-end-without-period nil) ; looks like this is already the default in emacs 27
   (setq colon-double-space nil))
 
 (defun lolsmacs-init ()
