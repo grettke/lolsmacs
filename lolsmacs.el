@@ -286,7 +286,8 @@ files to be persisted as quickly as possible. "
 (defun lolsmacs-buffers ()
   "Buffer behavior."
   (interactive)
-  (defconst lolsmacs-column-width 78)
+  
+  (defconst lolsmacs-column-width 80)
 
   (minibuffer-electric-default-mode)
 
