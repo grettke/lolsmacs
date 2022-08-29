@@ -82,7 +82,7 @@ function before anything else."
     mouse-leave-buffer-hook
     suspend-hook
     )
-  "When they run save all file buffers.")
+  "Add hook `lolsmacs-save-bufs' to these hooks.")
 
 (defvar
   lolsmacs-save-buffer-only-ons
@@ -92,7 +92,7 @@ function before anything else."
     vc-next-action
     vc-revert
     )
-  "Before they run save the buffer.")
+  "Call `lolsmacs-save-buffer-only-ons-advice' BEFORE executing these functions.")
 
 (defvar
   lolsmacs-save-buffers-ons
@@ -125,7 +125,7 @@ function before anything else."
     switch-to-buffer
     tex-compile
     )
-  "Before they run save all file buffers.")
+  "Call `lolsmacs-save-buffers-ons-advice' BEFORE executing these functions.")
 
 (defvar lolsmacs-save-bufs-debug nil "When non-nil message debug information for `lolsmacs-save-bufs'.")
 
@@ -140,13 +140,17 @@ When `lolsmacs-save-bufs-debug' is non-nil display performance information in
     (when lolsmacs-save-bufs-debug
       (message "lolsmacs-save-bufs completed in: %.06f seconds" (float-time (time-since time))))))
 (defun lolsmacs-save-buffers-ons-advice (&rest _args)
-  "Helper function for advising `lolsmacs-save-buffers-ons' (for advice ignore _ARGS)."
+  "Delegates work to `lolsmacs-save-bufs'.
+
+Helper function for advising `lolsmacs-save-buffers-ons' (for advice ignore _ARGS)."
   (lolsmacs-save-bufs))
 (defun lolsmacs-save-buffers-ons-advice-add (fn)
   "Add save on advice to FN."
   (advice-add fn :before #'lolsmacs-save-buffers-ons-advice))
 (defun lolsmacs-save-buffer-only-ons-advice (&rest _args)
-  "Helper function for advising `lolsmacs-save-buffer-only-ons' (for advice ignore _ARGS)."
+  "Save the current buffer.
+
+Helper function for advising `lolsmacs-save-buffer-only-ons' (for advice ignore _ARGS)."
   (basic-save-buffer))
 (defun lolsmacs-save-buffer-only-ons-advice-add (fn)
   "Add save on advice to FN."
