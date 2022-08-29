@@ -163,26 +163,26 @@ deals with this. This function deals with the granular file
 management not covered by existing modes. With that in mind here
 is where it begins.
 
-We must consider the elephant in the living room here: given
+We must consider the elephant in the living room: given
 `auto-save-visited-mode' is enabled why is this additional
-granularity even a topic? It is a topic because sometimes
+granularity even considered? It is considered because sometimes
 `auto-save-visited-mode' (ASVM) isn't fast enough.
 
 For example imagine editing a Makefile in Emacs, switching to a
 console terminal (either hosted within Emacs or externally using a
-terminal client), hitting the up arrow, then return to execute
+terminal client), hitting the up arrow, and finally returning to execute
 Make. You've performed this operation thousands of times and you
 do it in milliseconds. Its even faster if you rigged up a macro
-to execute and external command to do it. Is ASVM failing you
+to execute an external command to do it. Is ASVM failing you
 here? Nope. ASVM is working perfectly well and as expected right
 now.
 
 Here is why: ASVM saves file buffers when you've been idle for
-`auto-save-visited-interval' seconds. If you make it to large you
-can lose your work because it waited too long. If you make it to
-small it will waste energy and kill performance. ASVM's default settings are
+`auto-save-visited-interval' seconds. If you make it too large then you
+can lose your work because it waited too long. If you make it too
+small then it will waste energy and kill performance. ASVM's default settings are
 perfect for 99% of its use cases. Once in a while though you need to perform
-the same a lot sooner than before `auto-save-visited-interval' seconds. The
+the same thing a lot sooner than before `auto-save-visited-interval' seconds. The
 best way to consider these cases is splitting them up into three broad groups.
 
 There are three frames of mind to get into your cognitive workspace when you
@@ -199,13 +199,13 @@ examples of and how it needs to happen.
 
 1. Handling Special Events: Events, Hooks, and Keys
 
-This section tries to handling quitting Emacs in unhappy
-unplanned unpleasant ways.
-
-dying Emacs will go away on gracefully, begrudgingly, and by dying. Usually Emacs closes on request
-`save-buffers-kill-terminal'. Other times it might be locked up and you send
-it a signal `(elisp)Event Examples'. Other times you must kill
-`(elisp)Killing Emacs' Emacs' it. This function sets up the 3 ways to handle them:
+This section tries to handle quitting Emacs in unhappy
+unplanned unpleasant ways. Upon failure Emacs will go away on
+gracefully, begrudgingly, and by dying. Usually Emacs closes on
+the request of `save-buffers-kill-terminal'. Other times it
+might be locked up and you send it a signal `(elisp)Event Examples'.
+Other times you must kill `(elisp)Killing Emacs' Emacs' it.
+This function sets up the 3 ways to handle them:
 
   A. Before advice for functions
   B. Hooks
@@ -234,14 +234,15 @@ Perhaps you want to be able to perform `vc-next-action' against
 the state of the file on the disk, not in the buffer because you
 *know* that it is correct. For example if you have an automated
 build system that watches for file changes. You made some
-changes, save them, the build system saw them did the build and
-ran all of the unit tests and passed. At the same time, you
+changes, saved them, the build system saw them, buiilt them,
+and ran all of the unit tests and passed. At the same time, you
 notice something in your code and want to add a TODO item.
-However you don't want it to be part of the commit. Right now you have a file
-on disk that you know is correct and ready to commit, and changes in your
-buffer that you don't want to commit. In this case you want to commit the file
-without saving the changes. You need to all of this before
-`auto-save-visited-interval' and it is realistic to do so.
+However you don't want it to be part of the commit. Right now
+you have a file on disk that you know is correct and ready to
+commit, and changes in your buffer that you don't want to commit.
+In this case you want to commit the file without saving the changes.
+You need to manage all of this before `auto-save-visited-interval'
+and it is realistic to do so.
 
 3. Handling Related File Buffers
 
