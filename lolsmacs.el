@@ -89,6 +89,7 @@ function before anything else."
   '(
     tex-compile
     vc-diff
+    vc-ediff
     vc-next-action
     vc-revert
     )
@@ -111,7 +112,11 @@ function before anything else."
     list-buffers
     ns-do-hide-emacs
     org-babel-detangle
+    org-babel-execute-buffer
+    org-babel-execute-src-block
+    org-babel-execute-subtree
     org-babel-tangle
+    org-edit-src-code
     org-export-dispatch
     other-frame
     other-window
