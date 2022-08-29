@@ -177,7 +177,7 @@ to execute and external command to do it. Is ASVM failing you
 here? Nope. ASVM is working perfectly well and as expected right
 now.
 
-Here is why: ASVM save file buffers when you've been idle for
+Here is why: ASVM saves file buffers when you've been idle for
 `auto-save-visited-interval' seconds. If you make it to large you
 can lose your work because it waited too long. If you make it to
 small it will waste energy and kill performance. ASVM's default settings are
