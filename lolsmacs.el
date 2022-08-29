@@ -76,26 +76,59 @@ function before anything else."
   (global-auto-revert-mode))
 
 (defvar lolsmacs-save-on-hooks
-  (append
-   '(focus-out-hook mouse-leave-buffer-hook kill-emacs-hook suspend-hook))
+  '(
+    focus-out-hook
+    kill-emacs-hook
+    mouse-leave-buffer-hook
+    suspend-hook
+    )
   "When they run save all file buffers.")
+
 (defvar
   lolsmacs-save-buffer-only-ons
-  (append
-   '(tex-compile vc-diff vc-next-action vc-revert))
+  '(
+    tex-compile
+    vc-diff
+    vc-next-action
+    vc-revert
+    )
   "Before they run save the buffer.")
+
 (defvar
   lolsmacs-save-buffers-ons
-  (append
-   '(dired eshell grep ibuffer shell tex-compile)
-   '(compile ns-do-hide-emacs goto-line)
-   '(eval-buffer)
-   '(org-export-dispatch org-babel-tangle org-babel-detangle)
-   '(kill-current-buffer list-buffers save-buffers-kill-emacs save-buffers-kill-terminal switch-to-buffer pop-to-buffer)
-   '(delete-frame delete-other-frames other-frame suspend-frame)
-   '(delete-window quit-window other-window select-window))
+  '(
+    compile
+    delete-frame
+    delete-other-frames
+    delete-window
+    dired
+    eshell
+    eval-buffer
+    goto-line
+    grep
+    ibuffer
+    kill-current-buffer
+    list-buffers
+    ns-do-hide-emacs
+    org-babel-detangle
+    org-babel-tangle
+    org-export-dispatch
+    other-frame
+    other-window
+    pop-to-buffer
+    quit-window
+    save-buffers-kill-emacs
+    save-buffers-kill-terminal
+    select-window
+    shell
+    suspend-frame
+    switch-to-buffer
+    tex-compile
+    )
   "Before they run save all file buffers.")
+
 (defvar lolsmacs-save-bufs-debug nil "When non-nil message debug information for `lolsmacs-save-bufs'.")
+
 (defun lolsmacs-save-bufs ()
   "Save all file buffers.
 
@@ -286,7 +319,7 @@ files to be persisted as quickly as possible. "
 (defun lolsmacs-buffers ()
   "Buffer behavior."
   (interactive)
-  
+
   (defconst lolsmacs-column-width 80)
 
   (minibuffer-electric-default-mode)
