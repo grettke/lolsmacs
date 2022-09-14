@@ -310,8 +310,6 @@ files to be persisted as quickly as possible. "
   (setq show-paren-delay 0)
   (setq show-paren-style 'mixed)
 
-  (global-hl-line-mode)
-
   (setq whitespace-style '(tab-mark))
   (setf
    (cdr (assoc 'tab-mark whitespace-display-mappings))
