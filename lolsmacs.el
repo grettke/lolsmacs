@@ -98,6 +98,7 @@ function before anything else."
 (defvar
   lolsmacs-save-buffers-ons
   '(
+    byte-compile-file
     compile
     delete-frame
     delete-other-frames
