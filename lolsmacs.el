@@ -88,6 +88,7 @@ function before anything else."
   lolsmacs-save-buffer-only-ons
   '(
     tex-compile
+    TeX-command-master
     vc-diff
     vc-ediff
     vc-next-action
