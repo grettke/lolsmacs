@@ -39,12 +39,6 @@ function before anything else."
   (interactive)
   (setq load-prefer-newer t))
 
-(defun lolsmacs-customize ()
-  "Store customizations in a separate file."
-  (interactive)
-  (setq custom-file "custom.el")
-  (load custom-file :noerror))
-
 (defun lolsmacs-require-packages ()
   "Load packages used by this package."
   (interactive)
@@ -434,7 +428,6 @@ files to be persisted as quickly as possible. "
   "Load entire LOLSMacs configuration."
   (interactive)
   (lolsmacs-this-must-before-everything-else-in-your-init-file)
-  (lolsmacs-customize)
   (lolsmacs-require-packages)
   (lolsmacs-persistence)
   (lolsmacs-persistence-files)
