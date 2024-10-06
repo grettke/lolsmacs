@@ -428,6 +428,7 @@ files to be persisted as quickly as possible. "
   "Load entire LOLSMacs configuration."
   (interactive)
   (lolsmacs-this-must-before-everything-else-in-your-init-file)
+
   (lolsmacs-require-packages)
   (lolsmacs-persistence)
   (lolsmacs-persistence-files)
