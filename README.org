@@ -87,6 +87,10 @@ If you want to try out the features on their own before loading them start Emacs
 emacs --no-init-file --load ~/src/lolsmacs/lolsmacs.el --eval "(lolsmacs-init)" &
 #+END_SRC
 
+*CAVEAT*
+
+Emacs will start loading a lot of files earlier than you've probably seen before. Sometimes, that slows down the startup too much, and it doesn't make sense to load ~lolsmacs~ right away. That is fine; it still works later, too—it's just /ideal/ to load right away.
+
 * Subjectivity Fails
 
 They say that when you believe in something you should write it down. So I did
