@@ -1,6 +1,6 @@
 ;;; lolsmacs.el --- Law Of Least Surprise Lattice  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2019 Grant Rettke <grant@wisdomandwonder.com>
+;; Copyright (C) 2025 Grant Rettke
 
 ;; Author: Grant Rettke <grant@wisdomandonder.com>
 ;; Keywords: convenience, files, frames
