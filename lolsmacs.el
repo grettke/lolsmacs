@@ -5,7 +5,7 @@
 ;; Author: Grant Rettke <grant@wisdomandonder.com>
 ;; Keywords: convenience, files, frames
 ;; Version: 1.0.0
-;; Package-Requires: ((emacs "26.3"))
+;; Package-Requires: ((emacs "29.1"))
 ;; Homepage: https://github.com/grettke/lolsmacs
 
 ;; This program is free software; you can redistribute it and/or modify
